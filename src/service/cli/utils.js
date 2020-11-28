@@ -29,20 +29,20 @@ const createCategoriesArray = (min, max, category) => {
   const arraySize = getRandomInteger(min, max);
   const categoryItems = [];
 
-  categoryItems.push(category[getRandomInteger(min - 1, category.length - 1)])
+  categoryItems.push(category[getRandomInteger(min - 1, category.length - 1)]);
 
   for (let i = 0; i < (arraySize - 1); i++) {
-    let choice = category[getRandomInteger(0, category.length - 1)]
+    let choice = category[getRandomInteger(0, category.length - 1)];
 
     if (categoryItems.includes(choice)) {
       i--;
     } else {
       categoryItems.push(choice);
-    };
+    }
   }
 
   return categoryItems;
-}
+};
 
 const getPictureFileName = (number) => number > 10 ? `item${number}.jpg` : `item0${number}.jpg`;
 

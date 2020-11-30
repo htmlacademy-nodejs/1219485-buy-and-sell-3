@@ -16,16 +16,16 @@ const getRandomInteger = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const shuffleAnyEntity = (entities) => {
-  for (let i = entities.length - 1; i > 0; i--) {
+const shuffleCollection = (collection) => {
+  for (let i = collection.length - 1; i > 0; i--) {
     const randomPosition = Math.floor(Math.random() * i);
-    [entities[i], entities[randomPosition]] = [entities[randomPosition], entities[i]];
+    [collection[i], collection[randomPosition]] = [collection[randomPosition], collection[i]];
   }
 
-  return entities;
+  return collection;
 };
 
-const createCategoriesArray = (min, max, category) => {
+const createCategories = (min, max, category) => {
   const arraySize = getRandomInteger(min, max);
   const categoryItems = [];
 
@@ -44,15 +44,15 @@ const createCategoriesArray = (min, max, category) => {
   return categoryItems;
 };
 
-const getPictureFileName = (number) => number > 10 ? `item${number}.jpg` : `item0${number}.jpg`;
+const getPictureFileName = (number) => number.toString().padStart(2, `0`);
 
 module.exports.generateOffers = (count) => (
   Array(count).fill({}).map(() => ({
     title: TITLES[getRandomInteger(0, TITLES.length - 1)],
     picture: getPictureFileName(getRandomInteger(PictureRestrict.MIN, PictureRestrict.MAX)),
-    description: shuffleAnyEntity(SENTENCES).slice(1, 5).join(` `),
+    description: shuffleCollection(SENTENCES).slice(1, 5).join(` `),
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInteger(SumRestrict.MIN, SumRestrict.MAX),
-    category: createCategoriesArray(1, CATEGORIES.length, CATEGORIES),
+    category: createCategories(1, CATEGORIES.length, CATEGORIES),
   }))
 );

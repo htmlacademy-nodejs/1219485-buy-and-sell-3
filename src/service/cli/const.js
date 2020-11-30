@@ -1,9 +1,9 @@
 'use strict';
 
-module.exports.DEFAULT_COUNT = 1;
-module.exports.FILE_NAME = `mocks.json`;
+const DEFAULT_COUNT = 1;
+const FILE_NAME = `mocks.json`;
 
-module.exports.TITLES = [
+const TITLES = [
   `Продам книги Стивена Кинга.`,
   `Продам новую приставку Sony Playstation 5.`,
   `Продам отличную подборку фильмов на VHS.`,
@@ -15,7 +15,7 @@ module.exports.TITLES = [
   `Куплю детские санки.`
 ];
 
-module.exports.SENTENCES = [
+const SENTENCES = [
   `Товар в отличном состоянии.`,
   `Пользовались бережно и только по большим праздникам.`,
   `Продаю с болью в сердце...`,
@@ -33,7 +33,7 @@ module.exports.SENTENCES = [
   `Не пытайтесь торговаться. Цену вещам я знаю.`
 ];
 
-module.exports.CATEGORIES = [
+const CATEGORIES = [
   `Книги`,
   `Разное`,
   `Посуда`,
@@ -42,25 +42,39 @@ module.exports.CATEGORIES = [
   `Журналы`,
 ];
 
-module.exports.OfferType = {
+const OfferType = {
   OFFER: `offer`,
   SALE: `sale`,
 };
 
-module.exports.SumRestrict = {
+const SumRestrict = {
   MIN: 1000,
   MAX: 100000,
 };
 
-module.exports.PictureRestrict = {
+const PictureRestrict = {
   MIN: 1,
   MAX: 16,
 };
 
-module.exports.DEFAULT_COMMAND = `--help`;
-module.exports.USER_ARGV_INDEX = 2;
+const DEFAULT_COMMAND = `--help`;
+const USER_ARGV_INDEX = 2;
 
-module.exports.ExitCode = {
+const ExitCode = {
   ERROR: 1,
   SUCCESS: 0,
+};
+
+module.exports = {
+  DEFAULT_COUNT,
+  FILE_NAME,
+  TITLES,
+  SENTENCES,
+  CATEGORIES,
+  OfferType,
+  SumRestrict,
+  PictureRestrict,
+  DEFAULT_COMMAND,
+  USER_ARGV_INDEX,
+  ExitCode
 };

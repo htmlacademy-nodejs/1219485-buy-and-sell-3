@@ -25,23 +25,23 @@ const shuffleCollection = (collection) => {
   return collection;
 };
 
-const createCategories = (min, max, category) => {
+const createCollection = (min, max, collection) => {
   const arraySize = getRandomInteger(min, max);
-  const categoryItems = [];
+  const collectionItems = [];
 
-  categoryItems.push(category[getRandomInteger(min - 1, category.length - 1)]);
+  collectionItems.push(collection[getRandomInteger(min - 1, collection.length - 1)]);
 
   for (let i = 0; i < (arraySize - 1); i++) {
-    let choice = category[getRandomInteger(0, category.length - 1)];
+    let choice = collection[getRandomInteger(0, collection.length - 1)];
 
-    if (categoryItems.includes(choice)) {
+    if (collectionItems.includes(choice)) {
       i--;
     } else {
-      categoryItems.push(choice);
+      collectionItems.push(choice);
     }
   }
 
-  return categoryItems;
+  return collectionItems;
 };
 
 const getPictureFileName = (number) => number.toString().padStart(2, `0`);
@@ -53,6 +53,6 @@ module.exports.generateOffers = (count) => (
     description: shuffleCollection(SENTENCES).slice(1, 5).join(` `),
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInteger(SumRestrict.MIN, SumRestrict.MAX),
-    category: createCategories(1, CATEGORIES.length, CATEGORIES),
+    category: createCollection(1, CATEGORIES.length, CATEGORIES),
   }))
 );

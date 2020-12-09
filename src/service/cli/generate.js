@@ -1,6 +1,7 @@
 'use strict';
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
+const logger = require(`./logger`);
 
 const {
   DEFAULT_COUNT,
@@ -13,18 +14,18 @@ const {
 
 module.exports = {
   name: `--generate`,
-  run(argv) {
+  async run(argv) {
     const [count] = argv;
-    const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+    const countOffer = parseFloat(count) || DEFAULT_COUNT;
     const content = JSON.stringify(generateOffers(countOffer));
 
-    fs.writeFile(FILE_NAME, content, (err) => {
-      if (err) {
-        return console.error(`Can't write data to file...`);
-      }
-
-      return console.log(`Operation success. File created.`);
-    });
+    try {
+      await fs.writeFile(FILE_NAME, content);
+      logger.success(`Operation success. File created.`);
+    } catch (err) {
+      logger.error(`Can't write data to file...`);
+    }
   }
 };
+
 

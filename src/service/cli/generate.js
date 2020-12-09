@@ -2,22 +2,29 @@
 
 const fs = require(`fs`).promises;
 const logger = require(`./logger`);
+const {
+  generateOffers,
+  readContent
+} = require(`./utils`);
 
 const {
   DEFAULT_COUNT,
-  FILE_NAME
+  FILE_NAME,
 } = require(`./const`);
 
-const {
-  generateOffers
-} = require(`./utils`);
+const FILE_SENTENCES_PATH = `./src/data/sentences.txt`;
+const FILE_CATEGORIES_PATH = `./src/data/categories.txt`;
+const FILE_TITLES_PATH = `./src/data/titles.txt`;
 
 module.exports = {
   name: `--generate`,
   async run(argv) {
+    const titles = await readContent(FILE_TITLES_PATH);
+    const categories = await readContent(FILE_CATEGORIES_PATH);
+    const sentences = await readContent(FILE_SENTENCES_PATH);
     const [count] = argv;
     const countOffer = parseFloat(count) || DEFAULT_COUNT;
-    const content = JSON.stringify(generateOffers(countOffer));
+    const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
 
     try {
       await fs.writeFile(FILE_NAME, content);

@@ -1,9 +1,9 @@
 'use strict';
 
+const logger = require(`./logger`);
+const fs = require(`fs`).promises;
+
 const {
-  TITLES,
-  SENTENCES,
-  CATEGORIES,
   OfferType,
   SumRestrict,
   PictureRestrict
@@ -46,13 +46,28 @@ const createCollection = (min, max, collection) => {
 
 const getPictureFileName = (number) => number.toString().padStart(2, `0`);
 
-module.exports.generateOffers = (count) => (
+const readContent = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return content.split(`\n`);
+  } catch (err) {
+    logger.error(err);
+    return [];
+  }
+};
+
+const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    title: TITLES[getRandomInteger(0, TITLES.length - 1)],
+    title: titles[getRandomInteger(0, titles.length - 1)],
     picture: getPictureFileName(getRandomInteger(PictureRestrict.MIN, PictureRestrict.MAX)),
-    description: shuffleCollection(SENTENCES).slice(1, 5).join(` `),
+    description: shuffleCollection(sentences).slice(1, 5).join(` `),
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInteger(SumRestrict.MIN, SumRestrict.MAX),
-    category: createCollection(1, CATEGORIES.length, CATEGORIES),
+    category: createCollection(1, categories.length, categories),
   }))
 );
+
+module.exports = {
+  readContent,
+  generateOffers
+};

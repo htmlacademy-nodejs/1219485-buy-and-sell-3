@@ -46,7 +46,7 @@ const createCollection = (min, max, collection) => {
 
 const getPictureFileName = (number) => number.toString().padStart(2, `0`);
 
-module.exports.readContent = async (filePath) => {
+const readContent = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
     return content.split(`\n`);
@@ -56,7 +56,7 @@ module.exports.readContent = async (filePath) => {
   }
 };
 
-module.exports.generateOffers = (count, titles, categories, sentences) => (
+const generateOffers = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
     title: titles[getRandomInteger(0, titles.length - 1)],
     picture: getPictureFileName(getRandomInteger(PictureRestrict.MIN, PictureRestrict.MAX)),
@@ -66,3 +66,8 @@ module.exports.generateOffers = (count, titles, categories, sentences) => (
     category: createCollection(1, categories.length, categories),
   }))
 );
+
+module.exports = {
+  readContent,
+  generateOffers
+};

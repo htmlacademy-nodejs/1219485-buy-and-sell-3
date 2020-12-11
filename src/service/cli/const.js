@@ -2,6 +2,7 @@
 
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
+const DEFAULT_PORT = 3000;
 
 const OfferType = {
   OFFER: `offer`,
@@ -26,13 +27,23 @@ const ExitCode = {
   SUCCESS: 0,
 };
 
+const HttpCode = {
+  OK: 200,
+  NOT_FOUND: 404,
+  INTERNAL_SERVER_ERROR: 500,
+  FORBIDDEN: 403,
+  UNAUTHORIZED: 401,
+};
+
 module.exports = {
   DEFAULT_COUNT,
+  DEFAULT_PORT,
   FILE_NAME,
   OfferType,
   SumRestrict,
   PictureRestrict,
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
-  ExitCode
+  ExitCode,
+  HttpCode
 };

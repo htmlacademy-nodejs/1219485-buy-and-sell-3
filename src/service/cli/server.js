@@ -6,7 +6,8 @@ const logger = require(`./logger`);
 const {
   DEFAULT_PORT,
   HttpCode,
-  FILE_NAME
+  FILE_NAME,
+  ExitCode
 } = require(`./const`);
 
 const sendResponse = (res, statusCode, message) => {
@@ -61,6 +62,7 @@ module.exports = {
     .on(`listening`, (err) => {
       if (err) {
         logger.error(`Ошибка при создании сервера`, err);
+        process.exit(ExitCode.ERROR);
       }
 
       logger.success(`Ожидаю соединений на ${port}`);

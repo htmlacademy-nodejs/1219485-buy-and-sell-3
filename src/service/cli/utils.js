@@ -2,11 +2,14 @@
 
 const logger = require(`./logger`);
 const fs = require(`fs`).promises;
+const {nanoid} = require(`nanoid`);
 
 const {
   OfferType,
   SumRestrict,
-  PictureRestrict
+  PictureRestrict,
+  MAX_ID_LENGTH,
+  MAX_COMMENTS,
 } = require(`./const`);
 
 const getRandomInteger = (min, max) => {
@@ -44,6 +47,15 @@ const createCollection = (min, max, collection) => {
   return collectionItems;
 };
 
+const generateCommentsList = (count, comments) => (
+  Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
+    text: shuffleCollection(comments)
+      .slice(0, getRandomInteger(1, 3))
+      .join(` `),
+  }))
+);
+
 const getPictureFileName = (number) => number.toString().padStart(2, `0`);
 
 const readContent = async (filePath) => {
@@ -56,14 +68,16 @@ const readContent = async (filePath) => {
   }
 };
 
-const generateOffers = (count, titles, categories, sentences) => (
+const generateOffers = (count, titles, categories, sentences, comments) => (
   Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: titles[getRandomInteger(0, titles.length - 1)],
     picture: getPictureFileName(getRandomInteger(PictureRestrict.MIN, PictureRestrict.MAX)),
     description: shuffleCollection(sentences).slice(1, 5).join(` `),
     type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
     sum: getRandomInteger(SumRestrict.MIN, SumRestrict.MAX),
     category: createCollection(1, categories.length, categories),
+    comments: generateCommentsList(getRandomInteger(1, MAX_COMMENTS), comments),
   }))
 );
 

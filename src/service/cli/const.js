@@ -5,6 +5,7 @@ const FILE_NAME = `mocks.json`;
 const DEFAULT_PORT = 3000;
 const MAX_ID_LENGTH = 6;
 const MAX_COMMENTS = 4;
+const API_PREFIX = `/api`;
 
 const OfferType = {
   OFFER: `offer`,
@@ -31,10 +32,12 @@ const ExitCode = {
 
 const HttpCode = {
   OK: 200,
+  CREATED: 201,
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
   FORBIDDEN: 403,
   UNAUTHORIZED: 401,
+  BAD_REQUEST: 400
 };
 
 module.exports = {
@@ -49,5 +52,6 @@ module.exports = {
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
   ExitCode,
-  HttpCode
+  HttpCode,
+  API_PREFIX
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require(`./logger`);
+const colorLogger = require(`./logger`);
 
 const packageJsonFile = require(`../../../package.json`);
 
@@ -8,7 +8,7 @@ module.exports = {
   name: `--version`,
   run() {
     const version = packageJsonFile.version;
-    logger.version(version);
+    colorLogger.version(version);
   }
 };
 

@@ -2,7 +2,7 @@
 
 const chalk = require(`chalk`);
 
-const logger = {
+const colorLogger = {
   help: (text) => console.log(chalk.gray(text)),
   version: (versionNumber) => console.info(chalk.blue(versionNumber)),
   success: (msg) => console.log(chalk.green(msg)),
@@ -10,5 +10,5 @@ const logger = {
   info: (msg) => console.info(chalk.red(msg))
 };
 
-module.exports = logger;
+module.exports = colorLogger;
 

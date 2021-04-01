@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require(`./logger`);
+const colorLogger = require(`./logger`);
 
 module.exports = {
   name: `--help`,
@@ -17,6 +17,6 @@ module.exports = {
       --generate <count>    формирует файл mocks.json
     `;
 
-    logger.help(text);
+    colorLogger.help(text);
   }
 };

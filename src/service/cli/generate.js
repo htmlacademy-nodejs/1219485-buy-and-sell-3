@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require(`fs`).promises;
-const logger = require(`./logger`);
+const colorLogger = require(`./logger`);
 const {
   generateOffers,
   readContent
@@ -30,9 +30,9 @@ module.exports = {
 
     try {
       await fs.writeFile(FILE_NAME, content);
-      logger.success(`Operation success. File created.`);
+      colorLogger.success(`Operation success. File created.`);
     } catch (err) {
-      logger.error(`Can't write data to file...`);
+      colorLogger.error(`Can't write data to file...`);
     }
   }
 };

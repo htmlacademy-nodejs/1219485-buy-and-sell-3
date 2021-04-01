@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require(`./logger`);
+const colorLogger = require(`./logger`);
 const fs = require(`fs`).promises;
 const {nanoid} = require(`nanoid`);
 
@@ -63,7 +63,7 @@ const readContent = async (filePath) => {
     const content = await fs.readFile(filePath, `utf8`);
     return content.trim().split(`\n`);
   } catch (err) {
-    logger.error(err);
+    colorLogger.error(err);
     return [];
   }
 };
